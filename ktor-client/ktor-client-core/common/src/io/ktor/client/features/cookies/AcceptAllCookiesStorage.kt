@@ -13,7 +13,7 @@ import kotlin.math.*
 /**
  * [CookiesStorage] that stores all the cookies in an in-memory map.
  */
-class AcceptAllCookiesStorage : CookiesStorage {
+public class AcceptAllCookiesStorage : CookiesStorage {
     private val container: MutableList<Cookie> = mutableListOf()
     private val oldestCookie: AtomicLong = atomic(0L)
     private val mutex = Lock()
@@ -22,7 +22,7 @@ class AcceptAllCookiesStorage : CookiesStorage {
         val date = GMTDate()
         if (date.timestamp >= oldestCookie.value) cleanup(date.timestamp)
 
-        return container.filter { it.matches(requestUrl) }
+        return@withLock container.filter { it.matches(requestUrl) }
     }
 
     override suspend fun addCookie(requestUrl: Url, cookie: Cookie): Unit = mutex.withLock {

@@ -2,6 +2,8 @@
  * Copyright 2014-2019 JetBrains s.r.o and contributors. Use of this source code is governed by the Apache 2.0 license.
  */
 
+@file:Suppress("PublicApiImplicitType")
+
 package io.ktor.client.engine.cio
 
 import io.ktor.application.*
@@ -90,7 +92,7 @@ class CIOHttpsTest : TestWithKtor() {
     }
 
     @Test
-    fun hello(): Unit {
+    fun hello() {
         CIOCipherSuites.SupportedSuites.forEach { suite ->
             /**
              * Outdated by jetty.
@@ -188,14 +190,14 @@ class CIOHttpsTest : TestWithKtor() {
         test { client ->
             val testSize = 10
             var received = 0
-            client.async {
+            withContext(client.coroutineContext) {
                 repeat(testSize) {
                     client.get<HttpStatement>("https://www.facebook.com").execute { response ->
                         assertTrue(response.status.isSuccess())
                         received++
                     }
                 }
-            }.await()
+            }
 
             assertEquals(testSize, received)
         }

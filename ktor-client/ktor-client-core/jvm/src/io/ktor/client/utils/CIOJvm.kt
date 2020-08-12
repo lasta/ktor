@@ -4,6 +4,7 @@
 
 package io.ktor.client.utils
 
+import io.ktor.client.*
 import io.ktor.util.*
 import io.ktor.utils.io.pool.*
 import io.ktor.utils.io.pool.ByteBufferPool

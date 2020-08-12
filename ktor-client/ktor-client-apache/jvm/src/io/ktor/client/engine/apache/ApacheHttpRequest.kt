@@ -54,6 +54,6 @@ internal suspend fun CloseableHttpAsyncClient.sendRequest(
 
 internal fun mapCause(exception: Exception, requestData: HttpRequestData): Exception = when {
     exception is ConnectException && exception.isTimeoutException() -> ConnectTimeoutException(requestData, exception)
-    exception is java.net.SocketTimeoutException -> SocketTimeoutException(requestData, exception)
+    exception is SocketTimeoutException -> SocketTimeoutException(requestData, exception)
     else -> exception
 }

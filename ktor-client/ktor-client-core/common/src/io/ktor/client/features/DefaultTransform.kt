@@ -19,7 +19,7 @@ import kotlinx.coroutines.CancellationException
  * Usually installed by default so there is no need to use it
  * unless you have disabled it via [HttpClientConfig.useDefaultTransformers].
  */
-fun HttpClient.defaultTransformers() {
+public fun HttpClient.defaultTransformers() {
     requestPipeline.intercept(HttpRequestPipeline.Render) { body ->
         if (context.headers[HttpHeaders.Accept] == null) {
             context.headers.append(HttpHeaders.Accept, "*/*")
@@ -79,7 +79,7 @@ fun HttpClient.defaultTransformers() {
                 proceedWith(HttpResponseContainer(info, readRemaining.readBytes()))
             }
             ByteReadChannel::class -> {
-                val channel: ByteReadChannel = writer {
+                val channel: ByteReadChannel = writer(response.coroutineContext) {
                     try {
                         body.copyTo(channel, limit = Long.MAX_VALUE)
                     } catch (cause: CancellationException) {

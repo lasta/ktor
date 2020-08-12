@@ -80,7 +80,9 @@ private fun buildSerializer(value: Any, module: SerializersModule): KSerializer<
 @Suppress("EXPERIMENTAL_API_USAGE_ERROR")
 private fun Collection<*>.elementSerializer(module: SerializersModule): KSerializer<*> {
     val serializers: List<KSerializer<*>> =
-        filterNotNull().map { buildSerializer(it, module) }.distinctBy { it.descriptor.serialName }
+        filterNotNull()
+        .map { buildSerializer(it, module) }
+        .distinctBy { it.descriptor.serialName }
 
     if (serializers.size > 1) {
         error(

@@ -22,7 +22,7 @@ import io.ktor.utils.io.*
  * - ktor-client-gson
  * - ktor-client-json
  */
-expect fun defaultSerializer(): JsonSerializer
+public expect fun defaultSerializer(): JsonSerializer
 
 /**
  * [HttpClient] feature that serializes/de-serializes as JSON custom objects
@@ -55,13 +55,13 @@ class JsonFeature internal constructor(
     /**
      * [JsonFeature] configuration that is used during installation
      */
-    class Config {
+    public class Config {
         /**
          * Serializer that will be used for serializing requests and deserializing response bodies.
          *
          * Default value for [serializer] is [defaultSerializer].
          */
-        var serializer: JsonSerializer? = null
+        public var serializer: JsonSerializer? = null
 
         /**
          * Backing field with mutable list of content types that are handled by this feature.
@@ -110,7 +110,7 @@ class JsonFeature internal constructor(
         /**
          * Adds accepted content types. Existing content types will not be removed.
          */
-        fun receive(matcher: ContentTypeMatcher) {
+        public fun receive(matcher: ContentTypeMatcher) {
             _receiveContentTypeMatchers += matcher
         }
     }
@@ -125,7 +125,7 @@ class JsonFeature internal constructor(
     /**
      * Companion object for feature installation
      */
-    companion object Feature : HttpClientFeature<Config, JsonFeature> {
+    public companion object Feature : HttpClientFeature<Config, JsonFeature> {
         override val key: AttributeKey<JsonFeature> = AttributeKey("Json")
 
         override fun prepare(block: Config.() -> Unit): JsonFeature {
@@ -172,6 +172,6 @@ class JsonFeature internal constructor(
 /**
  * Install [JsonFeature].
  */
-fun HttpClientConfig<*>.Json(block: JsonFeature.Config.() -> Unit) {
+public fun HttpClientConfig<*>.Json(block: JsonFeature.Config.() -> Unit) {
     install(JsonFeature, block)
 }

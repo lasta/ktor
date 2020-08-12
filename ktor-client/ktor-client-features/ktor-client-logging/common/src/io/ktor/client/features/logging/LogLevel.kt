@@ -7,13 +7,15 @@ package io.ktor.client.features.logging
 /**
  * [Logging]  log level.
  */
-enum class LogLevel(
-    val info: Boolean,
-    val headers: Boolean, val body: Boolean
+@Suppress("NO_EXPLICIT_VISIBILITY_IN_API_MODE_WARNING", "KDocMissingDocumentation")
+public enum class LogLevel(
+    public val info: Boolean,
+    public val headers: Boolean,
+    public val body: Boolean
 ) {
     ALL(true, true, true),
     HEADERS(true, true, false),
     BODY(true, false, true),
-    INFO(true , false, false),
+    INFO(true, false, false),
     NONE(false, false, false)
 }

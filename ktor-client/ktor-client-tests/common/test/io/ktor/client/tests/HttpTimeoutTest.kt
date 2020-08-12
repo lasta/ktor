@@ -34,6 +34,7 @@ class HttpTimeoutTest : ClientLoader() {
         }
     }
 
+    @OptIn(InternalCoroutinesApi::class)
     @Test
     fun testGetWithExceptionAndTryAgain() = clientTests {
         test { client ->
@@ -44,6 +45,7 @@ class HttpTimeoutTest : ClientLoader() {
             }
 
             val job = requestBuilder.executionContext
+
             assertTrue { job.isActive }
 
             assertFails { client.request<String>(requestBuilder) }
@@ -402,7 +404,7 @@ class HttpTimeoutTest : ClientLoader() {
     }
 
     @Test
-    fun testConnectTimeout() = clientTests(listOf("Js", "iOS")) {
+    fun testConnectTimeout() = clientTests(listOf("Js", "iOS", "CIO")) {
         config {
             install(HttpTimeout) { connectTimeoutMillis = 1000 }
         }
@@ -432,7 +434,7 @@ class HttpTimeoutTest : ClientLoader() {
     }
 
     @Test
-    fun testConnectTimeoutPerRequestAttributes() = clientTests(listOf("Js", "iOS")) {
+    fun testConnectTimeoutPerRequestAttributes() = clientTests(listOf("Js", "iOS", "CIO")) {
         config {
             install(HttpTimeout)
         }
@@ -479,7 +481,7 @@ class HttpTimeoutTest : ClientLoader() {
     }
 
     @Test
-    fun testSocketTimeoutWriteFailOnWrite() = clientTests(listOf("Js", "Curl", "Android")) {
+    fun testSocketTimeoutWriteFailOnWrite() = clientTests(listOf("Js", "Curl", "Android", "CIO")) {
         config {
             install(HttpTimeout) { socketTimeoutMillis = 500 }
         }
@@ -492,7 +494,7 @@ class HttpTimeoutTest : ClientLoader() {
     }
 
     @Test
-    fun testSocketTimeoutWriteFailOnWritePerRequestAttributes() = clientTests(listOf("Js", "Curl", "Android")) {
+    fun testSocketTimeoutWriteFailOnWritePerRequestAttributes() = clientTests(listOf("Js", "Curl", "Android", "CIO")) {
         config {
             install(HttpTimeout)
         }
