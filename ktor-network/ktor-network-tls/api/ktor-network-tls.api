@@ -107,7 +107,6 @@ public final class io/ktor/network/tls/OIDKt {
 public final class io/ktor/network/tls/SecretExchangeType : java/lang/Enum {
 	public static final field ECDHE Lio/ktor/network/tls/SecretExchangeType;
 	public static final field RSA Lio/ktor/network/tls/SecretExchangeType;
-	public final fun getJvmName ()Ljava/lang/String;
 	public static fun valueOf (Ljava/lang/String;)Lio/ktor/network/tls/SecretExchangeType;
 	public static fun values ()[Lio/ktor/network/tls/SecretExchangeType;
 }
@@ -198,9 +197,10 @@ public final class io/ktor/network/tls/TLSConfigBuilder {
 	public final fun setTrustManager (Ljavax/net/ssl/TrustManager;)V
 }
 
-public final class io/ktor/network/tls/TLSConfigBuilderKt {
+public final class io/ktor/network/tls/TLSConfigBuilderJvmKt {
 	public static final fun addCertificateChain (Lio/ktor/network/tls/TLSConfigBuilder;[Ljava/security/cert/X509Certificate;Ljava/security/PrivateKey;)V
 	public static final fun addKeyStore (Lio/ktor/network/tls/TLSConfigBuilder;Ljava/security/KeyStore;[C)V
+	public static final fun takeFrom (Lio/ktor/network/tls/TLSConfigBuilder;Lio/ktor/network/tls/TLSConfigBuilder;)V
 }
 
 public final class io/ktor/network/tls/TLSHandshakeType : java/lang/Enum {
@@ -224,11 +224,14 @@ public final class io/ktor/network/tls/TLSHandshakeType$Companion {
 	public final fun byCode (I)Lio/ktor/network/tls/TLSHandshakeType;
 }
 
+public final class io/ktor/network/tls/TLSJvmKt {
+	public static final fun tls (Lio/ktor/network/sockets/Socket;Lkotlin/coroutines/CoroutineContext;Ljavax/net/ssl/X509TrustManager;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun tls$default (Lio/ktor/network/sockets/Socket;Lkotlin/coroutines/CoroutineContext;Ljavax/net/ssl/X509TrustManager;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
 public final class io/ktor/network/tls/TLSKt {
 	public static final fun tls (Lio/ktor/network/sockets/Socket;Lkotlin/coroutines/CoroutineContext;Lio/ktor/network/tls/TLSConfig;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static final fun tls (Lio/ktor/network/sockets/Socket;Lkotlin/coroutines/CoroutineContext;Ljavax/net/ssl/X509TrustManager;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static final fun tls (Lio/ktor/network/sockets/Socket;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static synthetic fun tls$default (Lio/ktor/network/sockets/Socket;Lkotlin/coroutines/CoroutineContext;Ljavax/net/ssl/X509TrustManager;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static synthetic fun tls$default (Lio/ktor/network/sockets/Socket;Lkotlin/coroutines/CoroutineContext;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
@@ -245,21 +248,6 @@ public final class io/ktor/network/tls/TLSRecordType : java/lang/Enum {
 
 public final class io/ktor/network/tls/TLSRecordType$Companion {
 	public final fun byCode (I)Lio/ktor/network/tls/TLSRecordType;
-}
-
-public final class io/ktor/network/tls/TLSVersion : java/lang/Enum {
-	public static final field Companion Lio/ktor/network/tls/TLSVersion$Companion;
-	public static final field SSL3 Lio/ktor/network/tls/TLSVersion;
-	public static final field TLS10 Lio/ktor/network/tls/TLSVersion;
-	public static final field TLS11 Lio/ktor/network/tls/TLSVersion;
-	public static final field TLS12 Lio/ktor/network/tls/TLSVersion;
-	public final fun getCode ()I
-	public static fun valueOf (Ljava/lang/String;)Lio/ktor/network/tls/TLSVersion;
-	public static fun values ()[Lio/ktor/network/tls/TLSVersion;
-}
-
-public final class io/ktor/network/tls/TLSVersion$Companion {
-	public final fun byCode (I)Lio/ktor/network/tls/TLSVersion;
 }
 
 public final class io/ktor/network/tls/extensions/HashAlgorithm : java/lang/Enum {
